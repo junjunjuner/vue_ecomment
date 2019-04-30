@@ -4,7 +4,7 @@ import Router from 'vue-router';
 import Layouts from '@/common/Layouts';
 import EcommerceParameter from '@/common/Body/Page1';
 import Forum from '@/common/Body/Page2';
-import EcommerceComment from '@/common/Body/Page3_2';
+import EcommerceComment from '@/common/Body/Page3_4';
 import Tender from '@/common/Body/Page4';
 import NumberAttribution from '@/common/Body/Page5';
 // import Aside from '@/common/layout/Aside';
@@ -34,7 +34,7 @@ export default new Router({
           component: Forum
         },
         {
-          path: '/common/Body/Page3_2',
+          path: '/common/Body/Page3_4',
           name: 'EcommerceComment',
           component: EcommerceComment
         },

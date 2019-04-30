@@ -1,5 +1,7 @@
+<!--新增搜索关键词高亮功能-->
 <template>
   <div>
+    <div id="select">
     <el-input type="text" v-model="search" placeholder="此处可搜索评价详情" width="200px"></el-input>
     <!--<el-input type="submit" value="搜索" width="50"></el-input>-->
     <!--类别选择-->
@@ -12,21 +14,41 @@
         :value="item.label"
       ></el-option>
     </el-select>
+    </div>
     <div id="form">
       <!--数据展示（表单）-->
+      <!--搜索关键词高亮-->
       <el-table :data="newData" stripe style="width: 100%" v-loading="loading">
-        <el-table-column
-          prop="type" label="产品类别" width="180"></el-table-column>
-        <el-table-column
-          prop="brand" label="商品品牌" width="180"></el-table-column>
-        <el-table-column
-          prop="name" label="商品名称" width="180"></el-table-column>
-        <el-table-column
-           prop="comment" label="评价详情" v-html="showDate(row.comment)"></el-table-column>
-        <el-table-column
-          prop="commenttype" label="评价类型" width="100"></el-table-column>
-        <el-table-column
-          prop="source" label="数据来源" width="100"></el-table-column>
+        <el-table-column label="产品类别" width="180">
+          <template slot-scope="scope">
+            <span class="col-cont" v-html="showDate(scope.row.type)"></span>
+          </template>
+        </el-table-column>
+        <el-table-column label="商品品牌" width="180">
+          <template slot-scope="scope">
+            <span class="col-cont" v-html="showDate(scope.row.brand)"></span>
+          </template>
+        </el-table-column>
+        <el-table-column label="商品名称" width="180">
+          <template slot-scope="scope">
+            <span class="col-cont" v-html="showDate(scope.row.name)"></span>
+          </template>
+        </el-table-column>
+        <el-table-column label="评价详情">
+          <template slot-scope="scope">
+            <span class="col-cont" v-html="showDate(scope.row.comment)"></span>
+          </template>
+        </el-table-column>
+        <el-table-column label="评价类型" width="100">
+          <template slot-scope="scope">
+            <span class="col-cont" v-html="showDate(scope.row.commenttype)"></span>
+          </template>
+        </el-table-column>
+        <el-table-column label="数据来源" width="100">
+          <template slot-scope="scope">
+            <span class="col-cont" v-html="showDate(scope.row.source)"></span>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
     <!--分页功能-->
@@ -94,10 +116,8 @@
       showDate(val) {
         val = val + '';
         if (val.indexOf(this.search) !== -1 && this.search !== '') {
-          console.log(val.replace(this.search, '<font color="red">' + this.search + '</font>'));
           return val.replace(this.search, '<font color="red">' + this.search + '</font>');
         } else {
-          console.log(val);
           return val;
         }
       },
